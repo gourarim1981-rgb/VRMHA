@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VRMHA – Azubis & Fachkräfte aus Marokko</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1f3c;
+    --navy-light: #163260;
+    --green: #2ecc71;
+    --green-dark: #27ae60;
+    --green-pale: #e8f8f0;
+    --white: #ffffff;
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-300: #cbd5e1;
+    --gray-500: #64748b;
+    --gray-700: #334155;
+    --gold: #f5a623;
+    --radius: 14px;
+    --shadow: 0 4px 24px rgba(13,31,60,0.10);
+    --shadow-lg: 0 12px 48px rgba(13,31,60,0.16);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    color: var(--navy);
+    background: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 { font-family: 'DM Serif Display', serif; line-height: 1.2; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-100);
+    padding: 0 5vw;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px;
+  }
+  .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--navy);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .logo-dot { display: inline-block; width: 10px; height: 10px; background: var(--green); border-radius: 50%; }
+  nav ul { list-style: none; display: flex; gap: 32px; }
+  nav ul a { text-decoration: none; color: var(--gray-700); font-weight: 500; font-size: .92rem; transition: color .2s; }
+  nav ul a:hover { color: var(--green-dark); }
+  .nav-cta {
+    background: var(--navy); color: var(--white);
+    padding: 10px 22px; border-radius: 50px; font-weight: 600; font-size: .9rem;
+    text-decoration: none; transition: background .2s;
+  }
+  .nav-cta:hover { background: var(--green-dark); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 92vh;
+    background: linear-gradient(135deg, #0d1f3c 0%, #163260 60%, #0f2a4a 100%);
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; gap: 0;
+    padding: 80px 5vw 60px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(46,204,113,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -80px; left: 20%;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(46,204,113,0.07) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-text { position: relative; z-index: 2; animation: fadeUp .8s ease both; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(46,204,113,0.15); border: 1px solid rgba(46,204,113,0.3);
+    color: var(--green); padding: 6px 16px; border-radius: 50px;
+    font-size: .82rem; font-weight: 600; letter-spacing: .05em;
+    margin-bottom: 24px; text-transform: uppercase;
+  }
+  .hero-badge::before { content: '●'; font-size: .5rem; }
+  .hero h1 {
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    color: var(--white); margin-bottom: 20px;
+    line-height: 1.15;
+  }
+  .hero h1 em { color: var(--green); font-style: normal; }
+  .hero-sub {
+    font-size: 1.1rem; color: rgba(255,255,255,.72);
+    max-width: 480px; margin-bottom: 36px; font-weight: 300;
+  }
+  .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 52px; }
+  .btn-primary {
+    background: var(--green); color: var(--white);
+    padding: 15px 30px; border-radius: 50px; font-weight: 700;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 9px;
+    font-size: .98rem; transition: all .25s; box-shadow: 0 4px 20px rgba(46,204,113,.35);
+  }
+  .btn-primary:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(46,204,113,.45); }
+  .btn-secondary {
+    background: rgba(255,255,255,.1); color: var(--white);
+    border: 1.5px solid rgba(255,255,255,.3);
+    padding: 15px 30px; border-radius: 50px; font-weight: 600;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 9px;
+    font-size: .98rem; transition: all .25s; backdrop-filter: blur(8px);
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,.18); transform: translateY(-2px); }
+  .hero-stats {
+    display: flex; gap: 36px; flex-wrap: wrap;
+  }
+  .stat { }
+  .stat-num { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--white); }
+  .stat-num span { color: var(--green); }
+  .stat-label { font-size: .8rem; color: rgba(255,255,255,.55); font-weight: 500; margin-top: 2px; }
+
+  /* hero visual */
+  .hero-visual {
+    position: relative; z-index: 2;
+    animation: fadeUp .8s .15s ease both;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .hero-card {
+    background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+    border-radius: 24px; padding: 36px 32px;
+    backdrop-filter: blur(16px); max-width: 360px; width: 100%;
+  }
+  .hero-card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem; color: var(--white); margin-bottom: 22px;
+  }
+  .candidate-list { display: flex; flex-direction: column; gap: 14px; }
+  .candidate-item {
+    background: rgba(255,255,255,.08); border-radius: 12px;
+    padding: 14px 16px; display: flex; align-items: center; gap: 14px;
+  }
+  .candidate-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--green), #00b894);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .candidate-name { font-weight: 600; color: var(--white); font-size: .9rem; }
+  .candidate-role { font-size: .78rem; color: rgba(255,255,255,.55); }
+  .candidate-tag {
+    margin-left: auto; background: rgba(46,204,113,.2); color: var(--green);
+    padding: 3px 10px; border-radius: 50px; font-size: .72rem; font-weight: 600;
+  }
+  .hero-card-footer {
+    margin-top: 20px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.1);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .hero-card-footer span { font-size: .8rem; color: rgba(255,255,255,.5); }
+  .processing-badge {
+    background: var(--green); color: var(--white);
+    padding: 5px 12px; border-radius: 50px; font-size: .75rem; font-weight: 700;
+  }
+
+  /* ── TRUST BAR ── */
+  .trust-bar {
+    background: var(--gray-50); border-bottom: 1px solid var(--gray-100);
+    padding: 22px 5vw;
+    display: flex; align-items: center; justify-content: center; gap: 48px;
+    flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 10px;
+    color: var(--gray-700); font-size: .88rem; font-weight: 500;
+  }
+  .trust-icon {
+    width: 34px; height: 34px; background: var(--green-pale);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 96px 5vw; }
+  .section-label {
+    font-size: .78rem; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--green-dark);
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-size: clamp(1.9rem, 3vw, 2.7rem);
+    color: var(--navy); margin-bottom: 18px;
+  }
+  .section-title em { color: var(--green-dark); font-style: normal; }
+  .section-sub {
+    font-size: 1.05rem; color: var(--gray-500); max-width: 580px;
+    font-weight: 300; line-height: 1.7;
+  }
+  .section-header { margin-bottom: 64px; }
+  .text-center { text-align: center; }
+  .text-center .section-sub { margin: 0 auto; }
+
+  /* ── SERVICES ── */
+  .services-bg { background: var(--white); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+  .service-card {
+    background: var(--white); border: 1.5px solid var(--gray-100);
+    border-radius: var(--radius); padding: 36px 28px;
+    transition: all .3s; position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 4px; height: 100%; background: var(--green);
+    transform: scaleY(0); transform-origin: bottom;
+    transition: transform .3s;
+  }
+  .service-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: transparent; }
+  .service-card:hover::before { transform: scaleY(1); }
+  .service-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    background: var(--green-pale);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; margin-bottom: 22px;
+  }
+  .service-title { font-family: 'DM Serif Display', serif; font-size: 1.25rem; margin-bottom: 12px; color: var(--navy); }
+  .service-desc { font-size: .9rem; color: var(--gray-500); line-height: 1.65; }
+
+  /* ── PROBLEM ── */
+  .problem-bg { background: var(--navy); }
+  .problem-bg .section-label { color: rgba(46,204,113,.8); }
+  .problem-bg .section-title { color: var(--white); }
+  .problem-bg .section-sub { color: rgba(255,255,255,.6); }
+  .problems-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+  }
+  .problem-item {
+    background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+    border-radius: var(--radius); padding: 30px 26px;
+  }
+  .problem-num {
+    font-family: 'DM Serif Display', serif; font-size: 3rem;
+    color: rgba(255,255,255,.1); line-height: 1; margin-bottom: 14px;
+  }
+  .problem-title { font-weight: 700; color: var(--white); margin-bottom: 10px; font-size: 1.05rem; }
+  .problem-desc { font-size: .88rem; color: rgba(255,255,255,.55); line-height: 1.65; }
+
+  /* ── SOLUTION ── */
+  .solution-layout {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+  }
+  .solution-list { display: flex; flex-direction: column; gap: 24px; }
+  .solution-item {
+    display: flex; gap: 18px; align-items: flex-start;
+  }
+  .solution-check {
+    width: 36px; height: 36px; background: var(--green);
+    border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0; color: white;
+    font-size: 1rem; margin-top: 2px;
+  }
+  .solution-text h4 { font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .solution-text p { font-size: .9rem; color: var(--gray-500); line-height: 1.6; }
+  .solution-visual {
+    background: linear-gradient(135deg, var(--navy), var(--navy-light));
+    border-radius: 24px; padding: 44px 36px; color: white;
+  }
+  .solution-visual h3 { font-family: 'DM Serif Display', serif; font-size: 1.7rem; margin-bottom: 28px; }
+  .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .metric {
+    background: rgba(255,255,255,.07); border-radius: 14px; padding: 20px;
+  }
+  .metric-val { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--green); }
+  .metric-label { font-size: .8rem; color: rgba(255,255,255,.6); margin-top: 4px; }
+
+  /* ── PROCESS ── */
+  .process-bg { background: var(--gray-50); }
+  .process-steps {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; position: relative;
+  }
+  .process-steps::before {
+    content: ''; position: absolute; top: 44px; left: 12.5%; right: 12.5%;
+    height: 2px; background: linear-gradient(90deg, var(--green), var(--navy-light));
+    z-index: 0;
+  }
+  .step {
+    text-align: center; padding: 0 20px; position: relative; z-index: 1;
+  }
+  .step-num {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--white); border: 3px solid var(--green);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif; font-size: 1.3rem;
+    color: var(--green); margin: 0 auto 22px;
+    box-shadow: 0 0 0 6px var(--gray-50);
+  }
+  .step:first-child .step-num { background: var(--green); color: white; }
+  .step-title { font-weight: 700; color: var(--navy); margin-bottom: 10px; font-size: 1rem; }
+  .step-desc { font-size: .85rem; color: var(--gray-500); line-height: 1.6; }
+
+  /* ── INDUSTRIES ── */
+  .industries-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+  }
+  .industry-card {
+    background: var(--white); border: 1.5px solid var(--gray-100);
+    border-radius: var(--radius); padding: 28px 20px;
+    text-align: center; transition: all .25s; cursor: default;
+  }
+  .industry-card:hover {
+    border-color: var(--green); background: var(--green-pale);
+    transform: translateY(-3px); box-shadow: var(--shadow);
+  }
+  .industry-icon { font-size: 2.2rem; margin-bottom: 14px; }
+  .industry-name { font-weight: 600; color: var(--navy); font-size: .92rem; }
+
+  /* ── TRUST / TESTIMONIALS ── */
+  .trust-bg { background: var(--navy); }
+  .trust-bg .section-title { color: white; }
+  .trust-bg .section-label { color: rgba(46,204,113,.8); }
+  .trust-bg .section-sub { color: rgba(255,255,255,.6); }
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  .testimonial {
+    background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+    border-radius: var(--radius); padding: 32px 28px;
+    position: relative;
+  }
+  .quote-mark {
+    font-family: 'DM Serif Display', serif; font-size: 4rem;
+    color: var(--green); line-height: .8; margin-bottom: 14px;
+    opacity: .6;
+  }
+  .testimonial-text { font-size: .92rem; color: rgba(255,255,255,.8); line-height: 1.7; margin-bottom: 24px; }
+  .testimonial-author { display: flex; align-items: center; gap: 14px; }
+  .author-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--green), #00b894);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+  .author-name { font-weight: 700; color: white; font-size: .9rem; }
+  .author-role { font-size: .78rem; color: rgba(255,255,255,.5); }
+  .stars { color: var(--gold); font-size: .85rem; margin-bottom: 4px; }
+
+  /* ── CONTACT ── */
+  .contact-bg { background: var(--gray-50); }
+  .contact-layout {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start;
+  }
+  .contact-info-block { }
+  .contact-item {
+    display: flex; gap: 16px; align-items: flex-start; margin-bottom: 28px;
+  }
+  .contact-icon-box {
+    width: 46px; height: 46px; border-radius: 12px;
+    background: var(--navy); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .contact-detail h4 { font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .contact-detail a { text-decoration: none; color: var(--gray-500); font-size: .9rem; }
+  .contact-detail span { color: var(--gray-500); font-size: .9rem; }
+  .contact-cta-box {
+    background: var(--navy); border-radius: 24px; padding: 44px 40px;
+    color: white;
+  }
+  .contact-cta-box h3 { font-family: 'DM Serif Display', serif; font-size: 1.7rem; margin-bottom: 12px; }
+  .contact-cta-box p { color: rgba(255,255,255,.65); font-size: .95rem; margin-bottom: 30px; line-height: 1.6; }
+  .btn-wa {
+    background: #25D366; color: white;
+    padding: 16px 32px; border-radius: 50px; font-weight: 700;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
+    font-size: 1rem; width: 100%; justify-content: center;
+    transition: all .25s; box-shadow: 0 4px 20px rgba(37,211,102,.3);
+    margin-bottom: 14px;
+  }
+  .btn-wa:hover { background: #20b857; transform: translateY(-2px); }
+  .btn-cal {
+    background: rgba(255,255,255,.08); border: 1.5px solid rgba(255,255,255,.2);
+    color: white; padding: 15px 32px; border-radius: 50px; font-weight: 600;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
+    font-size: .96rem; width: 100%; justify-content: center;
+    transition: all .25s;
+  }
+  .btn-cal:hover { background: rgba(255,255,255,.15); transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #080f1e; color: rgba(255,255,255,.6);
+    padding: 56px 5vw 36px;
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px;
+    padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.08);
+    margin-bottom: 32px;
+  }
+  .footer-logo {
+    font-family: 'DM Serif Display', serif; font-size: 1.8rem;
+    color: white; margin-bottom: 14px; display: block;
+  }
+  .footer-desc { font-size: .88rem; line-height: 1.7; max-width: 280px; }
+  .footer-col h5 { color: white; font-weight: 700; margin-bottom: 18px; font-size: .9rem; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul a { color: rgba(255,255,255,.55); text-decoration: none; font-size: .88rem; transition: color .2s; }
+  .footer-col ul a:hover { color: var(--green); }
+  .footer-bottom {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 14px;
+  }
+  .footer-bottom span { font-size: .82rem; }
+  .footer-legal { display: flex; gap: 24px; }
+  .footer-legal a { color: rgba(255,255,255,.45); text-decoration: none; font-size: .82rem; transition: color .2s; }
+  .footer-legal a:hover { color: white; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding: 60px 5vw 48px; min-height: auto; }
+    .hero-visual { margin-top: 40px; }
+    .solution-layout, .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+    .process-steps { grid-template-columns: 1fr 1fr; gap: 36px; }
+    .process-steps::before { display: none; }
+    .footer-top { grid-template-columns: 1fr; gap: 32px; }
+    nav ul { display: none; }
+  }
+  @media (max-width: 600px) {
+    .process-steps { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2rem; }
+    .trust-bar { gap: 20px; }
+    section { padding: 64px 5vw; }
+  }
+
+  /* Divider */
+  .divider {
+    width: 48px; height: 4px; background: var(--green);
+    border-radius: 2px; margin: 16px 0 28px;
+  }
+  .text-center .divider { margin: 16px auto 28px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">VRM<span style="color:var(--green)">HA</span> <span class="logo-dot"></span></a>
+  <ul>
+    <li><a href="#leistungen">Leistungen</a></li>
+    <li><a href="#prozess">Prozess</a></li>
+    <li><a href="#branchen">Branchen</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+    <li><a href="https://new-world-student-center.vercel.app/" target="_blank" style="color:var(--green-dark);font-weight:600;">🎓 Akademie (Marokko) ↗</a></li>
+  </ul>
+  <a href="https://wa.me/491718332998" class="nav-cta" target="_blank">WhatsApp ↗</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">Offizielle Vermittlungsagentur</div>
+    <h1>Azubis & Fachkräfte aus Marokko –<em> schnell &amp; zuverlässig</em></h1>
+    <p class="hero-sub">Vermittlung ohne bürokratischen Aufwand. Wir bringen qualifizierte Kandidaten direkt zu Ihrem Unternehmen – bereits in 48 Stunden.</p>
+    <div class="hero-buttons">
+      <a href="https://wa.me/491718332998" class="btn-primary" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.558 4.136 1.535 5.874L0 24l6.334-1.508A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.896 0-3.663-.513-5.182-1.404l-.371-.222-3.763.897.944-3.666-.243-.386A9.818 9.818 0 012.182 12C2.182 6.56 6.56 2.182 12 2.182S21.818 6.56 21.818 12 17.44 21.818 12 21.818z"/></svg>
+        WhatsApp kontaktieren
+      </a>
+      <a href="#kontakt" class="btn-secondary">
+        📅 Termin buchen
+      </a>
+      <a href="https://new-world-student-center.vercel.app/" class="btn-secondary" target="_blank">
+        🎓 Zur Akademie
+      </a>
+    </div>
+    <p style="font-size:.82rem;color:rgba(255,255,255,.5);margin-bottom:28px;display:flex;align-items:center;gap:6px;">
+      <span style="background:var(--green);color:white;padding:2px 9px;border-radius:50px;font-size:.72rem;font-weight:700;">NEU</span>
+      Vorbereitung in Marokko jetzt verfügbar – über unsere Partnerakademie
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">48<span>h</span></div>
+        <div class="stat-label">Erste Kandidaten</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">0<span>€</span></div>
+        <div class="stat-label">Zur Kontaktaufnahme</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3<span>+</span></div>
+        <div class="stat-label">Mon. bis zur Einstellung</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div style="
+      position:relative;
+      border-radius:24px;
+      overflow:hidden;
+      box-shadow:0 24px 64px rgba(0,0,0,0.5);
+      border:1px solid rgba(255,255,255,0.12);
+      max-width:420px;
+      width:100%;
+    ">
+      <img
+        src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=840&h=580&fit=crop&crop=faces,center&q=90"
+        alt="Qualifizierte Fachkräfte – VRMHA"
+        style="width:100%;height:340px;object-fit:cover;display:block;"
+        loading="eager"
+      >
+      <div style="
+        position:absolute;bottom:0;left:0;right:0;
+        padding:32px 22px 20px;
+        background:linear-gradient(to top,rgba(13,31,60,0.97) 0%,transparent 100%);
+        display:flex;align-items:center;justify-content:space-between;
+      ">
+        <div>
+          <div style="font-size:.78rem;color:rgba(255,255,255,.5);margin-bottom:3px;">Fachkräfte aus Marokko</div>
+          <div style="font-size:.95rem;font-weight:600;color:#fff;">Bereit für Deutschland</div>
+        </div>
+        <div style="
+          background:var(--green);color:#fff;
+          padding:6px 14px;border-radius:50px;
+          font-size:.78rem;font-weight:700;white-space:nowrap;
+        ">✓ Geprüft</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><div class="trust-icon">✅</div> Vorgeprüfte Kandidaten</div>
+  <div class="trust-item"><div class="trust-icon">⚡</div> 48h Rückmeldung</div>
+  <div class="trust-item"><div class="trust-icon">📋</div> Visa-Unterstützung inklusive</div>
+  <div class="trust-item"><div class="trust-icon">🇩🇪</div> Deutschkenntnisse A2–B2</div>
+  <div class="trust-item"><div class="trust-icon">🤝</div> Kostenloser Erstkontakt</div>
+</div>
+
+<!-- SERVICES -->
+<section id="leistungen" class="services-bg">
+  <div class="section-header">
+    <div class="section-label">Unsere Leistungen</div>
+    <h2 class="section-title">Alles aus einer Hand –<br><em>für Ihren Erfolg</em></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Von der ersten Kandidatenauswahl bis zur erfolgreichen Integration – wir begleiten Sie durch den gesamten Prozess.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🎓</div>
+      <div class="service-title">Azubi-Vermittlung</div>
+      <p class="service-desc">Motivierte Auszubildende aus Marokko – bereits mit Sprachkenntnissen und Berufsinteresse. Wir prüfen und bereiten sie vor Ihrer Wahl vor.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💼</div>
+      <div class="service-title">Fachkräfte-Vermittlung</div>
+      <p class="service-desc">Erfahrene Fachkräfte für Handwerk, Pflege, IT, Bau und Gastronomie – mit anerkannten Abschlüssen und Praxiserfahrung.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏫</div>
+      <div class="service-title">Vorqualifizierung in Marokko</div>
+      <p class="service-desc">Unsere Partner schulen Kandidaten vor der Einreise – Deutschkurse, Berufsgrundlagen und kulturelle Vorbereitung inklusive.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛂</div>
+      <div class="service-title">Visa &amp; Integration</div>
+      <p class="service-desc">Wir unterstützen bei Visaanträgen, Anerkennungsverfahren und der Eingewöhnung am Arbeitsplatz – damit der Start reibungslos klappt.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem-bg">
+  <div class="section-header text-center">
+    <div class="section-label">Das Problem</div>
+    <h2 class="section-title" style="color:white;">Der deutsche Arbeitsmarkt –<br><em>am Limit</em></h2>
+    <div class="divider" style="background:rgba(46,204,113,.5);margin:16px auto 28px;"></div>
+    <p class="section-sub" style="color:rgba(255,255,255,.6);margin:0 auto;">Millionen offene Stellen, zu wenig Bewerber. Kennen Sie das?</p>
+  </div>
+  <div class="problems-grid">
+    <div class="problem-item">
+      <div class="problem-num">01</div>
+      <div class="problem-title">Fachkräftemangel</div>
+      <p class="problem-desc">Über 600.000 offene Stellen allein in Deutschland. Handwerk, Pflege und Bau sind am stärksten betroffen.</p>
+    </div>
+    <div class="problem-item">
+      <div class="problem-num">02</div>
+      <div class="problem-title">Zeitverlust bei der Suche</div>
+      <p class="problem-desc">Monate vergehen mit Stellenanzeigen, Bewerbungsgesprächen und Absagen. Ihre Stellen bleiben unbesetzt.</p>
+    </div>
+    <div class="problem-item">
+      <div class="problem-num">03</div>
+      <div class="problem-title">Bürokratische Hürden</div>
+      <p class="problem-desc">Visa, Anerkennung, Integrationskurse – der Verwaltungsaufwand schreckt viele Arbeitgeber ab.</p>
+    </div>
+    <div class="problem-item">
+      <div class="problem-num">04</div>
+      <div class="problem-title">Hohe Vermittlungskosten</div>
+      <p class="problem-desc">Klassische Agenturen verlangen hohe Gebühren ohne Garantien – und liefern oft Kandidaten ohne ausreichende Qualifikation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section>
+  <div class="solution-layout">
+    <div>
+      <div class="section-label">Unsere Lösung</div>
+      <h2 class="section-title">Wir machen Vermittlung <em>einfach</em></h2>
+      <div class="divider"></div>
+      <p class="section-sub" style="margin-bottom:40px;">VRMHA übernimmt den kompletten Prozess – Sie erhalten passende Kandidaten, wir kümmern uns um den Rest.</p>
+      <div class="solution-list">
+        <div class="solution-item">
+          <div class="solution-check">✓</div>
+          <div class="solution-text">
+            <h4>Persönlich geprüfte Kandidaten</h4>
+            <p>Jeder Kandidat wird von uns persönlich bewertet – Sprachstand, Qualifikation und Motivation werden vorab überprüft.</p>
+          </div>
+        </div>
+        <div class="solution-item">
+          <div class="solution-check">✓</div>
+          <div class="solution-text">
+            <h4>Schnell & transparent</h4>
+            <p>Innerhalb von 48 Stunden erhalten Sie passende Profile. Kein verstecktes Kleingedrucktes, keine Überraschungsgebühren.</p>
+          </div>
+        </div>
+        <div class="solution-item">
+          <div class="solution-check">✓</div>
+          <div class="solution-text">
+            <h4>Rundum-Begleitung</h4>
+            <p>Von Visa bis Wohnung – wir begleiten Kandidaten und Arbeitgeber durch jeden Schritt der Integration.</p>
+          </div>
+        </div>
+        <div class="solution-item">
+          <div class="solution-check">✓</div>
+          <div class="solution-text">
+            <h4>Kein Risiko für Sie</h4>
+            <p>Erst überzeugen lassen, dann entscheiden. Kostenlose Erstberatung ohne Verpflichtung.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="solution-visual">
+      <h3>Warum Marokko?</h3>
+      <p style="color:rgba(255,255,255,.7);font-size:.9rem;margin-bottom:28px;line-height:1.7;">Marokko ist eines der stärksten Partnerländer Deutschlands für qualifizierte Migration – mit wachsenden Deutschsprachkenntnissen und berufsaffiner Bevölkerung.</p>
+      <div class="metrics">
+        <div class="metric">
+          <div class="metric-val">37M+</div>
+          <div class="metric-label">Einwohner Marokkos</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val">A2–B2</div>
+          <div class="metric-label">Deutschniveau unserer Kandidaten</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val">98%</div>
+          <div class="metric-label">Kandidaten mit Berufserfahrung</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val">3 Mon.</div>
+          <div class="metric-label">Ø Zeit bis Einstellung</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="prozess" class="process-bg">
+  <div class="section-header text-center">
+    <div class="section-label">So funktioniert's</div>
+    <h2 class="section-title">In <em>4 Schritten</em> zum neuen Mitarbeiter</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="process-steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-title">Anfrage stellen</div>
+      <p class="step-desc">Kontaktieren Sie uns per WhatsApp oder buchen Sie einen Termin – kostenlos und unverbindlich.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-title">Profile erhalten</div>
+      <p class="step-desc">Innerhalb von 48 Stunden erhalten Sie passende Kandidatenprofile mit Lebenslauf und Sprachniveau.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-title">Interview führen</div>
+      <p class="step-desc">Sie führen ein Gespräch mit Ihren Wunschkandidaten – online oder direkt in Marokko.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-title">Einstellung &amp; Start</div>
+      <p class="step-desc">Wir begleiten Visa, Anerkennung und Ankunft. Ihr neuer Mitarbeiter startet reibungslos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section id="branchen">
+  <div class="section-header text-center">
+    <div class="section-label">Branchen</div>
+    <h2 class="section-title">Kandidaten für <em>Ihre Branche</em></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Wir vermitteln in allen wichtigen Sektoren mit branchenspezifischer Vorauswahl.</p>
+  </div>
+  <div class="industries-grid">
+    <div class="industry-card"><div class="industry-icon">🏥</div><div class="industry-name">Pflege & Gesundheit</div></div>
+    <div class="industry-card"><div class="industry-icon">🍽️</div><div class="industry-name">Gastronomie</div></div>
+    <div class="industry-card"><div class="industry-icon">🏗️</div><div class="industry-name">Bau & Handwerk</div></div>
+    <div class="industry-card"><div class="industry-icon">💻</div><div class="industry-name">IT & Technik</div></div>
+    <div class="industry-card"><div class="industry-icon">🚛</div><div class="industry-name">Logistik</div></div>
+    <div class="industry-card"><div class="industry-icon">⚙️</div><div class="industry-name">Mechatronik</div></div>
+    <div class="industry-card"><div class="industry-icon">🏢</div><div class="industry-name">Büro & Kaufmännisch</div></div>
+    <div class="industry-card"><div class="industry-icon">🎭</div><div class="industry-name">Einzelhandel</div></div>
+  </div>
+</section>
+
+<!-- TRUST / TESTIMONIALS -->
+<section class="trust-bg">
+  <div class="section-header text-center">
+    <div class="section-label">Vertrauen</div>
+    <h2 class="section-title">Deutsche Arbeitgeber <em>vertrauen uns</em></h2>
+    <div class="divider" style="background:rgba(46,204,113,.5);margin:16px auto 28px;"></div>
+    <p class="section-sub" style="margin:0 auto;">Das sagen Unternehmen, die bereits mit VRMHA zusammenarbeiten.</p>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">Wir haben lange nach qualifizierten Pflegekräften gesucht. VRMHA hat uns in kürzester Zeit drei exzellente Kandidaten vermittelt – alles hat reibungslos funktioniert.</p>
+      <div class="stars">★★★★★</div>
+      <div class="testimonial-author">
+        <div class="author-avatar">🏥</div>
+        <div>
+          <div class="author-name">Markus T.</div>
+          <div class="author-role">Pflegedienstleiter, Bonn</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">Endlich eine Agentur, die liefert! Unser neuer Elektriker aus Marokko spricht gut Deutsch und ist hochmotiviert. Der gesamte Prozess war transparent und schnell.</p>
+      <div class="stars">★★★★★</div>
+      <div class="testimonial-author">
+        <div class="author-avatar">🔧</div>
+        <div>
+          <div class="author-name">Stefan K.</div>
+          <div class="author-role">Inhaber, Elektrobetrieb NRW</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">Die Visa-Unterstützung durch VRMHA hat uns enorm viel Aufwand gespart. Wir haben mittlerweile zwei Azubis aus Marokko – beide super integriert und fleißig.</p>
+      <div class="stars">★★★★★</div>
+      <div class="testimonial-author">
+        <div class="author-avatar">🍴</div>
+        <div>
+          <div class="author-name">Claudia M.</div>
+          <div class="author-role">Restaurantbesitzerin, Köln</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="kontakt" class="contact-bg">
+  <div class="section-header">
+    <div class="section-label">Kontakt</div>
+    <h2 class="section-title">Bereit, Ihren nächsten<br><em>Mitarbeiter zu finden?</em></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Wir melden uns innerhalb von 48 Stunden mit passenden Kandidaten. Kostenlos & unverbindlich.</p>
+  </div>
+  <div class="contact-layout">
+    <div class="contact-info-block">
+      <div class="contact-item">
+        <div class="contact-icon-box">📍</div>
+        <div class="contact-detail">
+          <h4>Adresse</h4>
+          <span>Kessenicherstr. 139<br>53129 Bonn, Deutschland</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon-box">📞</div>
+        <div class="contact-detail">
+          <h4>Telefon & WhatsApp</h4>
+          <a href="tel:+491718332998">+49 171 8332998</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon-box">✉️</div>
+        <div class="contact-detail">
+          <h4>E-Mail</h4>
+          <a href="mailto:vrmha@outlook.de">vrmha@outlook.de</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon-box">🕐</div>
+        <div class="contact-detail">
+          <h4>Erreichbarkeit</h4>
+          <span>Mo–Fr: 08:00–18:00 Uhr<br>Sa: 09:00–14:00 Uhr</span>
+        </div>
+      </div>
+    </div>
+    <div class="contact-cta-box">
+      <h3>Jetzt kostenlos anfragen</h3>
+      <p>Kontaktieren Sie uns jetzt – wir finden innerhalb von 48 Stunden die passenden Kandidaten für Ihr Unternehmen.</p>
+      <a href="https://wa.me/491718332998?text=Hallo%2C%20ich%20m%C3%B6chte%20Fachkr%C3%A4fte%20aus%20Marokko%20vermittelt%20bekommen." class="btn-wa" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.558 4.136 1.535 5.874L0 24l6.334-1.508A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.896 0-3.663-.513-5.182-1.404l-.371-.222-3.763.897.944-3.666-.243-.386A9.818 9.818 0 012.182 12C2.182 6.56 6.56 2.182 12 2.182S21.818 6.56 21.818 12 17.44 21.818 12 21.818z"/></svg>
+        WhatsApp – Jetzt schreiben
+      </a>
+      <a href="mailto:vrmha@outlook.de" class="btn-cal">
+        ✉️ E-Mail senden
+      </a>
+      <p style="color:rgba(255,255,255,.4);font-size:.78rem;margin-top:18px;text-align:center;">Kostenlos & unverbindlich · Antwort innerhalb 48h</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <span class="footer-logo">VRMHA</span>
+      <p class="footer-desc">Ihr Partner für qualifizierte Fachkräfte und Auszubildende aus Marokko. Schnell, transparent und zuverlässig.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Navigation</h5>
+      <ul>
+        <li><a href="#leistungen">Leistungen</a></li>
+        <li><a href="#prozess">Prozess</a></li>
+        <li><a href="#branchen">Branchen</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 VRMHA Vermittlungsbüro · Kessenicherstr. 139, 53129 Bonn</span>
+
+  </div>
+</footer>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/491718332998" target="_blank"
+   style="position:fixed;bottom:28px;right:28px;z-index:999;
+          background:#25D366;color:white;
+          width:58px;height:58px;border-radius:50%;
+          display:flex;align-items:center;justify-content:center;
+          box-shadow:0 4px 24px rgba(37,211,102,.5);
+          font-size:1.6rem;text-decoration:none;
+          transition:transform .25s;" 
+   onmouseover="this.style.transform='scale(1.1)'" 
+   onmouseout="this.style.transform='scale(1)'">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.558 4.136 1.535 5.874L0 24l6.334-1.508A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.896 0-3.663-.513-5.182-1.404l-.371-.222-3.763.897.944-3.666-.243-.386A9.818 9.818 0 012.182 12C2.182 6.56 6.56 2.182 12 2.182S21.818 6.56 21.818 12 17.44 21.818 12 21.818z"/></svg>
+</a>
+
+</body>
+</html>
